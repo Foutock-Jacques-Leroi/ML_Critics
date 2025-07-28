@@ -1,9 +1,7 @@
 import streamlit as st
-
 import joblib
 import re
 import pandas as pd
-
 from streamlit_option_menu import option_menu
 
 
@@ -130,6 +128,7 @@ if selected == "Home Page":
 
 if selected == "Bulk Analysis":
     
+    
     st.title(" Dataset Sentiment Classifier.")
 
 
@@ -179,7 +178,7 @@ if selected == "Bulk Analysis":
                     array_str.append(i)
 
                 progress_bar.progress(30)
-                
+                print(array_str)
 
                 def preprocess_text(text):
                     review = re.sub('[^a-zA-Z]', ' ', text)
@@ -213,6 +212,10 @@ if selected == "Bulk Analysis":
                 real_n = len(negatif)
                 total = real_p + real_n
 
+
+                print(positif)
+                print(negatif)
+
                 progress_bar.progress(100)
 
 
@@ -226,17 +229,17 @@ if selected == "Bulk Analysis":
 
                     st.divider()
 
-                    s1, s2, s3, s4, s5 = st.columns(5)
+                    s1, s2, s3 = st.columns(3)
 
-                    with s3:
+                    with s2:
                         st.header("Critics Results")
 
-                    q1, q2, q3, q4, q5, q6 = st.columns(6)
+                    q1, q2, q3, q4, q5 = st.columns(5)
                     st.dataframe(df.head())
 
                     with q2:
                         st.metric("**Positif Critics**", real_p, total)
-                    with q5:
+                    with q4:
                         st.metric("**Negatif Critics**", real_n, total)
 
                 st.divider()
